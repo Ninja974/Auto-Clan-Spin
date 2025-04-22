@@ -1,0 +1,18 @@
+local player = game.Players.LocalPlayer
+local playerData = game:GetService("ReplicatedStorage"):WaitForChild("Player_Data"):WaitForChild(player.Name)
+
+while true do
+    local clan = playerData:WaitForChild("Clan").Value
+    if clan == "Tomioka" or clan == "Hashibira" or clan == "Tokito" or clan == "Soyama" then
+        break -- Si el clan es uno de los míticos, se detiene el bucle
+    end
+
+    local args = {
+        [1] = "check_can_spin"
+    }
+
+    game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("To_Server"):WaitForChild("Handle_Initiate_S_"):InvokeServer(unpack(args))
+    wait(1)
+end
+
+print("Clan detectado: " .. playerData:WaitForChild("Clan").Value)
